@@ -1,0 +1,52 @@
+[
+  {
+    "filename": "section_000.wav",
+    "start": 0,
+    "end": 59.9
+  },
+  {
+    "filename": "section_001.wav",
+    "start": 58.9,
+    "end": 122.55
+  },
+  {
+    "filename": "section_002.wav",
+    "start": 121.55,
+    "end": 178.89999999999998
+  },
+  {
+    "filename": "section_003.wav",
+    "start": 177.89999999999998,
+    "end": 238.65
+  },
+  {
+    "filename": "section_004.wav",
+    "start": 237.65,
+    "end": 308.05
+  },
+  {
+    "filename": "section_005.wav",
+    "start": 307.05,
+    "end": 365.75
+  },
+  {
+    "filename": "section_006.wav",
+    "start": 364.75,
+    "end": 424.55
+  },
+  {
+    "filename": "section_007.wav",
+    "start": 423.55,
+    "end": 486.1
+  },
+  {
+    "filename": "section_008.wav",
+    "start": 485.1,
+    "end": 542.25
+  },
+  {
+    "filename": "section_009.wav",
+    "start": 541.25,
+    "end": 591.732
+  }
+]

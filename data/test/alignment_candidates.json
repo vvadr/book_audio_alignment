@@ -1,0 +1,82 @@
+[
+  {
+    "section": "section_000",
+    "audio_path": "temporary_sections/section_000.wav",
+    "text_path": "../../data/test/alignment_drafts/section_000.txt",
+    "source": "transcription",
+    "similarity": 82.35,
+    "verified": false
+  },
+  {
+    "section": "section_001",
+    "audio_path": "temporary_sections/section_001.wav",
+    "text_path": "../../data/test/alignment_drafts/section_001.txt",
+    "source": "book",
+    "similarity": 98.65,
+    "verified": false
+  },
+  {
+    "section": "section_002",
+    "audio_path": "temporary_sections/section_002.wav",
+    "text_path": "../../data/test/alignment_drafts/section_002.txt",
+    "source": "book",
+    "similarity": 95.03,
+    "verified": false
+  },
+  {
+    "section": "section_003",
+    "audio_path": "temporary_sections/section_003.wav",
+    "text_path": "../../data/test/alignment_drafts/section_003.txt",
+    "source": "book",
+    "similarity": 98.26,
+    "verified": false
+  },
+  {
+    "section": "section_004",
+    "audio_path": "temporary_sections/section_004.wav",
+    "text_path": "../../data/test/alignment_drafts/section_004.txt",
+    "source": "book",
+    "similarity": 96.54,
+    "verified": false
+  },
+  {
+    "section": "section_005",
+    "audio_path": "temporary_sections/section_005.wav",
+    "text_path": "../../data/test/alignment_drafts/section_005.txt",
+    "source": "book",
+    "similarity": 98.93,
+    "verified": false
+  },
+  {
+    "section": "section_006",
+    "audio_path": "temporary_sections/section_006.wav",
+    "text_path": "../../data/test/alignment_drafts/section_006.txt",
+    "source": "book",
+    "similarity": 97.39,
+    "verified": false
+  },
+  {
+    "section": "section_007",
+    "audio_path": "temporary_sections/section_007.wav",
+    "text_path": "../../data/test/alignment_drafts/section_007.txt",
+    "source": "book",
+    "similarity": 98.91,
+    "verified": false
+  },
+  {
+    "section": "section_008",
+    "audio_path": "temporary_sections/section_008.wav",
+    "text_path": "../../data/test/alignment_drafts/section_008.txt",
+    "source": "book",
+    "similarity": 93.84,
+    "verified": false
+  },
+  {
+    "section": "section_009",
+    "audio_path": "temporary_sections/section_009.wav",
+    "text_path": "../../data/test/alignment_drafts/section_009.txt",
+    "source": "book",
+    "similarity": 94.55,
+    "verified": false
+  }
+]

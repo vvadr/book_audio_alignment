@@ -1,0 +1,133 @@
+# One environment for both machines:
+#   - macOS arm64 (Apple GPU via MPS)
+#   - Linux aarch64 DGX Spark / GB10 (NVIDIA GPU via CUDA 13.0)
+#
+# Create:  conda env create -f environment.yml
+# Update:  conda env update -f environment.yml --prune
+# Check:   conda run -n book-audio-alignment python scripts/check_env.py
+name: book-audio-alignment
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.16
+  - pip=26.2.2
+  - ffmpeg=9.0.2
+  - pip:
+      # PyTorch: same version everywhere, platform build chosen automatically.
+      - torch==2.14.1 ; sys_platform == "darwin"
+      - torch @ https://download.pytorch.org/whl/cu130/torch-2.14.1%2Bcu130-cp312-cp312-manylinux_2_28_aarch64.whl ; sys_platform == "linux" and platform_machine == "aarch64"
+      # Libraries the code imports directly.
+      - transformers==5.22.0
+      - librosa==1.0.0
+      - soundfile==0.14.0
+      - silero-vad==6.2.3
+      - rapidfuzz==3.14.6
+      - pymupdf==2.0
+      - ipykernel==7.4.0
+      # Every other package, pinned so both machines always get the same versions.
+      - annotated-doc==0.0.5
+      - anyio==4.16.0
+      - asttokens==3.0.2
+      - certifi==2026.10.23
+      - cffi==2.1.1
+      - charset-normalizer==3.5.2
+      - click==8.5.0
+      - cloudpickle==3.1.2
+      - comm==0.2.3
+      - debugpy==1.8.22
+      - decorator==5.3.1
+      - executing==2.3.0
+      - filelock==4.2.9
+      - flatbuffers==25.12.19
+      - fsspec==2026.9.0
+      - h11==0.16.0
+      - hf-xet==1.8.0
+      - httpcore2==2.16.0
+      - httpx2==2.16.0
+      - huggingface_hub==2.4.0
+      - idna==3.20
+      - ipython==9.18.1
+      - ipython_pygments_lexers==1.1.1
+      - jedi==0.20.1
+      - Jinja2==3.1.6
+      - joblib==1.6.0
+      - jupyter_client==8.10.0
+      - jupyter_core==5.9.1
+      - lazy-loader==0.6
+      - llvmlite==0.50.0
+      - markdown-it-py==4.2.0
+      - MarkupSafe==3.0.4
+      - matplotlib-inline==0.2.2
+      - mdurl==0.1.2
+      - mpmath==1.3.0
+      - msgpack==1.2.4
+      - narwhals==2.28.0
+      - nest-asyncio2==1.7.4
+      - networkx==3.7
+      - numba==0.68.1
+      - numpy==2.5.4
+      - onnxruntime==1.31.1
+      - packaging==26.3
+      - parso==0.8.7
+      - pexpect==4.9.0
+      - platformdirs==4.14.5
+      - pooch==1.9.0
+      - prompt_toolkit==3.0.53
+      - protobuf==7.36.2
+      - psutil==7.2.2
+      - ptyprocess==0.7.0
+      - pure_eval==0.2.4
+      - pycparser==3.12
+      - Pygments==2.21.0
+      - pymupdf4llm==2.0
+      - pymupdf_layout==2.0
+      - python-dateutil==4.0.0
+      - PyYAML==6.0.3
+      - pyzmq==27.3.0
+      - regex==2026.9.29
+      - requests==2.34.2
+      - rich==15.0.0
+      - safetensors==0.8.0
+      - scikit-learn==1.9.1
+      - scipy==1.18.1
+      - shellingham==1.5.4
+      - soxr==1.1.0
+      - stack-data==0.6.3
+      - sympy==1.14.0
+      - tabulate==0.10.0
+      - threadpoolctl==3.8.0
+      - tokenizers==0.23.3
+      - tornado==6.6
+      - tqdm==4.70.1
+      - traitlets==5.16.1
+      - truststore==0.10.5
+      - typer==0.27.3
+      - typing_extensions==4.16.0
+      - tzdata==2026.6
+      - urllib3==2.8.0
+      - wcwidth==0.9.4
+      # macOS only.
+      - appnope==1.0.0 ; sys_platform == "darwin"
+      # Linux only: NVIDIA CUDA libraries used by torch on the GB10 GPU.
+      - cuda-bindings==13.5.0 ; sys_platform == "linux"
+      - cuda-pathfinder==1.8.6 ; sys_platform == "linux"
+      - cuda-toolkit==13.0.3.0 ; sys_platform == "linux"
+      - nvidia-cublas==13.1.1.3 ; sys_platform == "linux"
+      - nvidia-cuda-cupti==13.0.85 ; sys_platform == "linux"
+      - nvidia-cuda-nvrtc==13.0.88 ; sys_platform == "linux"
+      - nvidia-cuda-runtime==13.0.96 ; sys_platform == "linux"
+      - nvidia-cudnn-cu13==9.24.0.43 ; sys_platform == "linux"
+      - nvidia-cufft==12.0.0.61 ; sys_platform == "linux"
+      - nvidia-cufile==1.15.1.6 ; sys_platform == "linux"
+      - nvidia-curand==10.4.0.35 ; sys_platform == "linux"
+      - nvidia-cusolver==12.0.4.66 ; sys_platform == "linux"
+      - nvidia-cusparse==12.6.3.3 ; sys_platform == "linux"
+      - nvidia-cusparselt-cu13==0.8.1 ; sys_platform == "linux"
+      - nvidia-nccl-cu13==2.30.7 ; sys_platform == "linux"
+      - nvidia-nvjitlink==13.5.37 ; sys_platform == "linux"
+      - nvidia-nvshmem-cu13==3.4.5 ; sys_platform == "linux"
+      - nvidia-nvtx==13.0.85 ; sys_platform == "linux"
+      - triton==3.8.0 ; sys_platform == "linux"
+variables:
+  # Let PyTorch fall back to CPU for any op the Apple GPU does not support.
+  PYTORCH_ENABLE_MPS_FALLBACK: "1"

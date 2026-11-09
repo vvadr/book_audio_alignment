@@ -1,29 +1,43 @@
-# Setup on macOS
+# Setup (macOS and the DGX Spark)
 
-Install Python 3.12 and [uv](https://docs.astral.sh/uv/), then from the project root run:
+One conda environment, `book-audio-alignment`, defined in `environment.yml`,
+works on both machines with the same package versions:
 
-```bash
-uv sync --locked
-source .venv/bin/activate
-```
+| Machine | GPU used | PyTorch build |
+|---|---|---|
+| Mac (Apple silicon) | Apple GPU (MPS) | `torch 2.14.1` |
+| DGX Spark, Linux aarch64 | NVIDIA GB10 (CUDA) | `torch 2.14.1+cu130` |
 
-For audio tools, install FFmpeg (`brew install ffmpeg`), which provides both
-`ffmpeg` and `ffprobe`. In your notebook editor, select the project's
-`.venv/bin/python` as the kernel and restart the kernel after installing packages.
-Run dependent cells from the top. The notebooks use paths relative to
-`src/notebooks`, so use that directory as the notebook working directory.
-
-The lockfile is the source of truth for dependencies. `requirements.txt` is a
-portable export of it and can also be installed with
-`uv pip install -r requirements.txt` while `.venv` is active. Regenerate it after
-dependency changes with:
+Python (3.12.16) and FFmpeg (9.0.2) also come from the environment, so you
+don't need a system FFmpeg. Install [Miniforge](https://conda-forge.org/download/),
+then from the project root run:
 
 ```bash
-uv export --locked --format requirements-txt --no-hashes --no-emit-project --output-file requirements.txt
+conda env create -f environment.yml
+conda activate book-audio-alignment
+python -m ipykernel install --user --name book-audio-alignment \
+  --display-name book-audio-alignment \
+  --env PATH "$CONDA_PREFIX/bin:\${PATH}" --env PYTORCH_ENABLE_MPS_FALLBACK 1
+python scripts/check_env.py
 ```
 
-The model notebooks may download model files on their first run. The second
-model notebook selects CUDA, Apple Metal (MPS), or CPU according to availability.
+`check_env.py` should end with `RESULT OK` and show `cuda` on the Spark and
+`mps` on the Mac. In your notebook editor, select the `book-audio-alignment`
+kernel. The notebooks use paths relative to `src/notebooks`, so use that
+directory as the notebook working directory.
+
+Code that uses a model picks the GPU automatically, so the same code runs on
+both machines:
+
+```python
+device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+```
+
+Don't hard-code `device="cuda"`, because that fails on the Mac.
+
+To change dependencies, edit `environment.yml`, then run
+`conda env update -f environment.yml --prune` on both machines. The model
+notebooks download model files on their first run if they aren't cached.
 
 # Transcribe audio
 

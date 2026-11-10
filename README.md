@@ -48,3 +48,29 @@ Opus, AAC and WMA. Existing outputs are left untouched; use
 `--url` to override the API endpoint, and `--timeout` to set the socket timeout
 in seconds. The script continues with other books if one fails and exits with
 a nonzero status if any transcription failed.
+
+## Transcribe long paired books
+
+The paired script processes recordings up to **600 seconds (10 minutes)** and
+skips longer recordings. This is a local selection limit; previously the script
+had no duration cutoff. To process the longer recordings, run:
+
+```bash
+python scripts/transcribe_long_paired.py
+```
+
+The long-audio script splits each recording into 300-second chunks, transcribes
+them in order, and writes the same `transcription.txt` and `metadata.json`
+outputs in the book directory. Segment and word timestamps in `segments` are
+relative to the original recording; `chunks` retains each original API response
+and its offset. Chunk boundaries can affect recognition at the split. Successful
+chunk responses are saved under each book's `.transcribe_long_chunks` directory,
+so a rerun resumes after an interruption. Changing the audio, endpoint, or chunk
+size starts a new set of checkpoints. Once outputs exist, both scripts skip the
+book; `--force` replaces outputs and, for long audio, re-transcribes every chunk.
+
+Both scripts require `ffprobe`; the long-audio script also requires `ffmpeg`.
+Use `--max-duration SECONDS` with the **same value on both scripts** to change
+the cutoff, and `--chunk-duration SECONDS` to change the long script's chunk
+size. Both scripts also support `--paired-dir`, `--url`, and `--timeout`. Each
+continues to the next book after an error and exits nonzero if any book failed.

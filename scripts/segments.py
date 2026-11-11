@@ -19,7 +19,9 @@ def normalize_word(word):
 
 def is_split_word(last, first, vocabulary):
     """True if `last` + `first` is one book word that the API cut in two ("kel" + "ibdi")."""
-    if not last[-1].isalnum():          # "kel," ends with punctuation, so the word was finished
+    # A cut word has a letter on both sides of the cut.
+    # "kel," ends with punctuation and "– debdi" starts with a dash: nothing was cut.
+    if not (last[-1].isalnum() and first[0].isalnum()):
         return False
     joined = normalize_word(last + first)
     both_are_words = normalize_word(last) in vocabulary and normalize_word(first) in vocabulary
@@ -48,7 +50,8 @@ def join_segments(segments, book_words=None):
             last, first = words[-1], piece[0]
 
             # Problem 1: a word cut in two, "qo" + "'ydiribdi".
-            if first[0] in APOSTROPHES:
+            # The word before must end with a letter; after "dedi:" the ' opens a quote.
+            if first[0] in APOSTROPHES and last[-1].isalpha():
                 words[-1] = last + first
                 piece = piece[1:]
 

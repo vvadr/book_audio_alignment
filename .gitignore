@@ -13,3 +13,6 @@ wheels/
 /data/*
 !/data/test/
 !/data/test/**
+
+# macOS folder files
+.DS_Store

@@ -5,13 +5,15 @@ import http.client
 import json
 import mimetypes
 import os
-import shlex
 import sys
 import uuid
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit
 
+from segments import join_segments
+
 API_URL = "http://192.168.1.71:8194/transcribe"
+DEFAULT_AUDIO = Path(__file__).resolve().parent.parent / "data" / "test" / "test_audio.mp3"
 
 
 def transcribe(audio, url=None, *, timeout=600):
@@ -94,3 +96,46 @@ def extract_text(response_body):
     def from_payload(value):
         if isinstance(value, str) and value.strip():
             return value.strip()
+        if isinstance(value, dict):
+            if isinstance(value.get("segments"), list):
+                text = join_segments(value["segments"])
+                if text:
+                    return text
+            if "text" in value:
+                return from_payload(value["text"])
+        return None
+
+    text = from_payload(payload)
+    if text is None:
+        raise ValueError("The transcription API response has no text in a known place")
+    return text
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("audio", nargs="?", type=Path, default=DEFAULT_AUDIO,
+                        help="audio file (default: data/test/test_audio.mp3)")
+    parser.add_argument("url", nargs="?", default=None,
+                        help="endpoint (default: TRANSCRIBE_URL, then API_URL)")
+    parser.add_argument("-o", "--output", type=Path, default=None,
+                        help="save the response exactly as returned")
+    parser.add_argument("--timeout", type=float, default=600,
+                        help="socket timeout in seconds (default 600)")
+    args = parser.parse_args()
+
+    url = args.url or os.environ.get("TRANSCRIBE_URL") or API_URL
+    if not url:
+        url = input("Transcription endpoint URL: ").strip()
+
+    response = transcribe(args.audio, url, timeout=args.timeout)
+
+    if args.output:
+        args.output.write_bytes(response)
+        print("Saved the response to", args.output, file=sys.stderr)
+
+    print(response.decode("utf-8", errors="replace"))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

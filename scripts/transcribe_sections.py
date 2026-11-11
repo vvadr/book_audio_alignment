@@ -76,7 +76,6 @@ def main():
             continue
 
         print(f"[{index}/{len(to_process)}] Transcribing {filename}...")
-        # Call your existing API uploader; save raw output before interpreting it.
         response = transcribe(audio_path, url=args.url, timeout=args.timeout)
         raw_dir = output_path.parent / "raw_api_responses"
         raw_dir.mkdir(parents=True, exist_ok=True)
@@ -89,7 +88,6 @@ def main():
             "end": end,
             "transcription": words,
         }
-        # Keep the output in source metadata order, even on resumed runs.
         results = [by_filename[s["filename"]] for s in sections if s["filename"] in by_filename]
         save_results(output_path, results)
 

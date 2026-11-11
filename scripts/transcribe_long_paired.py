@@ -94,10 +94,8 @@ def process_book(book, *, url, timeout, force, max_duration, chunk_duration):
                 )
                 response = transcribe(chunk_audio, url=url, timeout=timeout)
                 payload, text = parse_chunk_response(response)
-                # Validate timestamps before publishing the checkpoint.
                 for segment in payload["segments"]:
                     offset_segment(segment, start)
-                # A checkpoint is published only after the full response validates.
                 with tempfile.NamedTemporaryFile(dir=cache, delete=False) as temp:
                     temp_path = Path(temp.name)
                     try:

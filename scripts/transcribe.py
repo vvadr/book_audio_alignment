@@ -89,7 +89,7 @@ def extract_text(response_body):
     try:
         payload = json.loads(decoded)
     except json.JSONDecodeError:
-        return decoded  # The API returned plain text, not JSON.
+        return decoded
 
     def from_payload(value):
         if isinstance(value, str) and value.strip():

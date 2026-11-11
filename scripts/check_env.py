@@ -25,7 +25,7 @@ def main() -> int:
             module = importlib.import_module(name)
             version = getattr(module, "__version__", "")
             print(f"  {name:13} {version}")
-        except Exception as error:  # report every failure, keep going
+        except Exception as error:
             ok = False
             print(f"  {name:13} FAILED: {type(error).__name__}: {error}")
 

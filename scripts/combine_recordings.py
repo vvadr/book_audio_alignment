@@ -29,7 +29,6 @@ def combine(book: Path) -> None:
         print(f"Skipping {book.name}: {output.name} already exists")
         return
 
-    # Use a temporary directory on the same filesystem for an atomic final move.
     with tempfile.TemporaryDirectory(dir=book) as temp_dir:
         temp = Path(temp_dir)
         manifest = temp / "recordings.txt"

@@ -39,7 +39,7 @@ def to_recording_time(words, section):
     Add the section's start so they count from the start of the whole recording."""
     converted = []
     for word in words:
-        new_word = dict(word)  # a copy, so the original list stays unchanged
+        new_word = dict(word)
         new_word["start"] = round(section["start"] + word["start"], 3)
         new_word["end"] = round(section["start"] + word["end"], 3)
         converted.append(new_word)

@@ -14,7 +14,6 @@ from transcribe import transcribe
 
 PAIRED_DIR = Path(__file__).resolve().parents[1] / "data" / "paired"
 AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".flac", ".ogg", ".opus", ".aac", ".wma"}
-# Both paired scripts use this cutoff: long recordings are strictly above it.
 DEFAULT_MAX_DURATION = 600.0
 
 
@@ -87,7 +86,6 @@ def outputs_exist(book, force):
 def save_outputs(book, metadata, text):
     transcript_path = book / "transcription.txt"
     metadata_path = book / "metadata.json"
-    # Stage both outputs before replacing either file.
     with tempfile.TemporaryDirectory(dir=book) as temporary:
         temp = Path(temporary)
         (temp / "transcription.txt").write_text(text + "\n", encoding="utf-8")

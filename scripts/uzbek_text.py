@@ -7,8 +7,8 @@ People and the transcription API type the plain ' for both.
 """
 
 ALL_APOSTROPHES = "'‘’ʻʼ`"
-OKINA = "\u02bb"   # ʻ  after o and g
-TUTUQ = "\u02bc"   # ʼ  the tutuq sign
+OKINA = "\u02bb"
+TUTUQ = "\u02bc"
 
 
 def fix_apostrophes(text, tutuq=TUTUQ):
@@ -22,24 +22,22 @@ def fix_apostrophes(text, tutuq=TUTUQ):
     result = []
 
     for i, char in enumerate(text):
-        # Most characters are not apostrophes: copy them unchanged
         if char not in ALL_APOSTROPHES:
             result.append(char)
             continue
 
-        # The characters on each side of this apostrophe
         before = text[i - 1] if i > 0 else ""
         after = text[i + 1] if i + 1 < len(text) else ""
 
         if result and result[-1] in (OKINA, tutuq):
-            continue                          # bog''labdi: keep only one
+            continue
         elif before in {"g", "G"}:
-            result.append(OKINA)              # gʻamgin, togʻ
+            result.append(OKINA)
         elif before in {"o", "O"} and after.isalpha():
-            result.append(OKINA)              # oʻzbek
+            result.append(OKINA)
         elif before.isalpha() and after.isalpha():
-            result.append(tutuq)              # inʼom
+            result.append(tutuq)
         else:
-            result.append(char)               # a quote mark
+            result.append(char)
 
     return "".join(result)

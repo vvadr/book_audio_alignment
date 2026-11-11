@@ -10,7 +10,6 @@ from pathlib import Path
 
 import pymupdf
 
-# Change this to the PDF you want to convert.
 PDF_PATH = "data/test/test_book.pdf"
 
 

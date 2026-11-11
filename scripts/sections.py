@@ -9,6 +9,10 @@ the time up to the middle of its overlap with each neighbour.
 import json
 from pathlib import Path
 
+from segments import normalize_word
+
+NEAR_SECONDS = 1.0
+
 
 def load_sections(path):
     """Read temporary_sections.json and add own_start / own_end to every section."""
@@ -46,11 +50,52 @@ def to_recording_time(words, section):
     return converted
 
 
-def keep_owned(words, section):
-    """Keep only the words whose middle lies in the time this section owns."""
-    kept = []
-    for word in words:
-        middle = (word["start"] + word["end"]) / 2
-        if section["own_start"] <= middle < section["own_end"]:
-            kept.append(word)
-    return kept
+def owns(section, word):
+    """True if the middle of the word lies in the time this section owns."""
+    middle = (word["start"] + word["end"]) / 2
+    return section["own_start"] <= middle < section["own_end"]
+
+
+def same_word_nearby(word, others):
+    """True if `others` has the same word within NEAR_SECONDS of this one."""
+    for other in others:
+        same_text = normalize_word(other["word"]) == normalize_word(word["word"])
+        close = abs(other["start"] - word["start"]) <= NEAR_SECONDS
+        if same_text and close:
+            return True
+    return False
+
+
+def stitch(sections, words_per_section):
+    """Join the words of all sections into one list for the whole recording.
+
+    sections:          from load_sections
+    words_per_section: one list of words per section, already in recording time
+
+    Step 1 keeps every word whose time the section owns.
+    Step 2 rescues a word outside its section's time when the neighbouring
+    sections did not keep the same word nearby. That happens when only one
+    section heard the word ("Men"), or when two sections disagree about its
+    time and each leaves it to the other ("Soʻng").
+    """
+    kept = [[] for section in sections]
+    left_out = []
+
+    for i in range(len(sections)):
+        for word in words_per_section[i]:
+            if owns(sections[i], word):
+                kept[i].append(word)
+            else:
+                left_out.append((i, word))
+
+    for i, word in left_out:
+        neighbours = kept[max(0, i - 1)] + kept[min(len(kept) - 1, i + 1)]
+        if not same_word_nearby(word, neighbours):
+            kept[i].append(word)
+
+    all_words = []
+    for section_words in kept:
+        all_words.extend(section_words)
+
+    all_words.sort(key=lambda word: word["start"])
+    return all_words

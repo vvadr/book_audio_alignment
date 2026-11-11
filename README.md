@@ -1,3 +1,38 @@
+# Extract paired-book PDFs
+
+To create `data/paired/<book>/book.txt` for every book, run:
+
+```bash
+python scripts/pdf_to_txt_paired.py
+```
+
+The script examines PDFs in each book's `text/` directory and book directory.
+It selects one edition, preferring the book over lesson plans or teacher guides
+and an edition with usable text over a scan. Duplicate PDFs are processed once.
+It extracts embedded text and uses Tesseract at 300 DPI for pages with missing
+or visibly broken text. Original Latin/Cyrillic spelling and line breaks are
+preserved, with repeated margins, page numbers and line-end word splits cleaned.
+
+PyMuPDF is a project dependency. OCR also needs Tesseract with Uzbek Latin and
+Cyrillic language packs (Ubuntu: `tesseract-ocr`, `tesseract-ocr-uzb`,
+`tesseract-ocr-uzb-cyrl`). The script also detects a local Tesseract installation
+under `.local/ocr/usr/`, or accepts `--tesseract` and `--tessdata` paths.
+
+Existing nonempty `book.txt` files are skipped; `--force` replaces them. OCR page
+results are cached in `data/paired/.pdf_text_cache/`, so interrupted runs resume.
+Use `--workers 16` to run more OCR pages concurrently, `--book FOLDER_NAME` to
+select a book, `--force-ocr` to disregard embedded text, or `--analyze-only` to
+inspect source choices without conversion. `--paired-dir`, `--language` and
+`--dpi` are also configurable. `--force-ocr` still uses matching OCR checkpoints.
+
+Each converted book gets `book_extraction.json` with its source, page counts and
+warnings. `data/paired/pdf_extraction_report.json` contains the collection report,
+including alternative PDFs, missing full textbooks and title/grade/part
+mismatches. Only the supplied PDFs are converted; incorrect or incomplete source
+pairings require fixing the input files. OCR can contain recognition errors.
+Failures are reported per book, processing continues, and the script exits
+nonzero if any book failed.
+
 # Transcribe audio
 
 Set `API_URL` near the top of `scripts/transcribe.py` to your full endpoint

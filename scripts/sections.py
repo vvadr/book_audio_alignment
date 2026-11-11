@@ -66,6 +66,15 @@ def same_word_nearby(word, others):
     return False
 
 
+def is_duplicate(first, second):
+    """True if two neighbouring words are one spoken word that two sections both kept."""
+    return (
+        first["section"] != second["section"]
+        and normalize_word(first["word"]) == normalize_word(second["word"])
+        and abs(second["start"] - first["start"]) <= NEAR_SECONDS
+    )
+
+
 def stitch(sections, words_per_section):
     """Join the words of all sections into one list for the whole recording.
 
@@ -77,12 +86,15 @@ def stitch(sections, words_per_section):
     sections did not keep the same word nearby. That happens when only one
     section heard the word ("Men"), or when two sections disagree about its
     time and each leaves it to the other ("Soʻng").
+    Step 3 removes a word that two sections both kept ("yuribdi, yuribdi,"):
+    the copy with the better score stays.
     """
     kept = [[] for section in sections]
     left_out = []
 
     for i in range(len(sections)):
         for word in words_per_section[i]:
+            word["section"] = sections[i]["filename"]
             if owns(sections[i], word):
                 kept[i].append(word)
             else:
@@ -98,4 +110,13 @@ def stitch(sections, words_per_section):
         all_words.extend(section_words)
 
     all_words.sort(key=lambda word: word["start"])
-    return all_words
+
+    result = []
+    for word in all_words:
+        if result and is_duplicate(result[-1], word):
+            if word["score"] > result[-1]["score"]:
+                result[-1] = word
+            continue
+        result.append(word)
+
+    return result

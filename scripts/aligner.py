@@ -16,6 +16,7 @@ from nemo.collections.asr.parts.utils.aligner_utils import (
 )
 
 MODEL_NAME = "nvidia/stt_uz_fastconformer_hybrid_large_pc"
+MIN_FRAME_SCORE = -3.0
 
 
 def load_model():
@@ -33,39 +34,55 @@ def load_model():
     return model
 
 
-def word_details(word, log_probs, frame_duration):
-    """The pieces (tokens) of one aligned word, and how sure the model was about them.
+def make_word(word, log_probs, frame_duration):
+    """Turn one aligned NeMo word into a dict with its time, score and trimmed seconds.
 
     The score is the average log-probability of the word's pieces over the
     frames they cover: 0 means certain, -1 is about 37 %, -3 is about 5 %.
+    Frames the model was not sure about (below MIN_FRAME_SCORE) are cut off
+    both ends of the word. That is how "Qadrli" loses its 11 s of music.
     """
-    pieces = []
+    frame_numbers = []
     frame_scores = []
 
     for token in word.tokens:
         if token.text == BLANK_TOKEN:
             continue
 
-        pieces.append({
-            "piece": token.text,
-            "start": round(token.t_start, 2),
-            "end": round(token.t_end, 2),
-        })
-
         first_frame = round(token.t_start / frame_duration)
         last_frame = round(token.t_end / frame_duration)
         for frame in range(first_frame, last_frame):
+            frame_numbers.append(frame)
             frame_scores.append(log_probs[0, frame, token.token_id].item())
 
-    score = round(sum(frame_scores) / len(frame_scores), 2)
-    return pieces, score
+    sure_frames = [
+        frame for frame, frame_score in zip(frame_numbers, frame_scores)
+        if frame_score >= MIN_FRAME_SCORE
+    ]
+
+    if sure_frames:
+        start = sure_frames[0] * frame_duration
+        end = (sure_frames[-1] + 1) * frame_duration
+    else:
+        start = word.t_start
+        end = word.t_end
+
+    trimmed = (word.t_end - word.t_start) - (end - start)
+
+    return {
+        "word": word.text,
+        "start": round(start, 2),
+        "end": round(end, 2),
+        "score": round(sum(frame_scores) / len(frame_scores), 2),
+        "trimmed": round(trimmed, 2),
+    }
 
 
 def align(model, audio_path, text):
     """Find when each word of `text` is spoken in `audio_path`.
 
     Returns a list like
-    [{"word": "oʻzbek", "start": 12.72, "end": 13.12, "score": -0.4, "pieces": [...]}, ...].
+    [{"word": "oʻzbek", "start": 12.72, "end": 13.12, "score": -0.4, "trimmed": 0.0}, ...].
     Times are in seconds, counted from the start of this audio file.
     """
     (
@@ -101,14 +118,7 @@ def align(model, audio_path, text):
         if isinstance(segment, Segment):
             for word in segment.words_and_tokens:
                 if isinstance(word, Word):
-                    pieces, score = word_details(word, log_probs, frame_duration)
-                    words.append({
-                        "word": word.text,
-                        "start": round(word.t_start, 2),
-                        "end": round(word.t_end, 2),
-                        "score": score,
-                        "pieces": pieces,
-                    })
+                    words.append(make_word(word, log_probs, frame_duration))
 
     if len(words) != len(text.split()):
         print(f"Warning: {audio_path} has {len(text.split())} words, but {len(words)} were aligned")

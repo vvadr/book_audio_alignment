@@ -1,0 +1,272 @@
+OneLogger: Setting error_handling_strategy to DISABLE_QUIETLY_AND_REPORT_METRIC_ERROR for rank (rank=0) with OneLogger disabled. To override: explicitly set error_handling_strategy parameter.
+No exporters were provided. This means that no telemetry data will be collected.
+[NeMo I 2026-11-12 12:10:14 mixins:194] Tokenizer SentencePieceTokenizer initialized with 1024 tokens
+[NeMo W 2026-11-12 12:10:15 modelPT:175] If you intend to do training or fine-tuning, please call the ModelPT.setup_training_data() method and provide a valid configuration file to setup the train data loader.
+    Train config : 
+    manifest_filepath:
+    - /workspace-mnt/final-train-manifests/MCV/train_manifest_final.json
+    - /workspace-mnt/final-train-manifests/FLEURS/train_manifest_final.json
+    - /workspace-mnt/final-train-manifests/UZBEKVOICE/train_manifest_final.json
+    sample_rate: 16000
+    batch_size: 32
+    shuffle: true
+    num_workers: 8
+    pin_memory: true
+    max_duration: 20
+    min_duration: 0.1
+    is_tarred: false
+    tarred_audio_filepaths: null
+    shuffle_n: 2048
+    bucketing_strategy: synced_randomized
+    bucketing_batch_size: null
+    
+[NeMo W 2026-11-12 12:10:15 modelPT:182] If you intend to do validation, please call the ModelPT.setup_validation_data() or ModelPT.setup_multiple_validation_data() method and provide a valid configuration file to setup the validation data loader(s). 
+    Validation config : 
+    manifest_filepath:
+    - /workspace-mnt/final-train-manifests/FLEURS/test_manifest_final.json
+    - /workspace-mnt/final-train-manifests/MCV/dev_manifest_final.json
+    sample_rate: 16000
+    batch_size: 128
+    shuffle: false
+    use_start_end_token: false
+    num_workers: 8
+    pin_memory: true
+    
+[NeMo W 2026-11-12 12:10:15 modelPT:189] Please call the ModelPT.setup_test_data() or ModelPT.setup_multiple_test_data() method and provide a valid configuration file to setup the test data loader(s).
+    Test config : 
+    manifest_filepath: null
+    sample_rate: 16000
+    batch_size: 128
+    shuffle: false
+    use_start_end_token: false
+    num_workers: 8
+    pin_memory: true
+    
+[NeMo W 2026-11-12 12:10:15 nemo_logging:364] /home/intern/book_audio_alignment/.venv/lib/python3.12/site-packages/torch/nn/modules/rnn.py:123: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1
+      warnings.warn(
+    
+[NeMo I 2026-11-12 12:10:15 rnnt_models:226] Using RNNT Loss : warprnnt_numba
+    Loss warprnnt_numba_kwargs: {'fastemit_lambda': 0.0, 'clamp': -1.0}
+[NeMo I 2026-11-12 12:10:15 rnnt_models:226] Using RNNT Loss : warprnnt_numba
+    Loss warprnnt_numba_kwargs: {'fastemit_lambda': 0.0, 'clamp': -1.0}
+[NeMo W 2026-11-12 12:10:15 label_looping_base:143] No conditional node support for Cuda.
+    Cuda graphs with while loops are disabled, decoding speed will be slower
+    Reason: CUDA is not available
+[NeMo I 2026-11-12 12:10:15 rnnt_models:226] Using RNNT Loss : warprnnt_numba
+    Loss warprnnt_numba_kwargs: {'fastemit_lambda': 0.0, 'clamp': -1.0}
+[NeMo W 2026-11-12 12:10:15 label_looping_base:143] No conditional node support for Cuda.
+    Cuda graphs with while loops are disabled, decoding speed will be slower
+    Reason: CUDA is not available
+[NeMo I 2026-11-12 12:10:15 save_restore_connector:287] Model EncDecHybridRNNTCTCBPEModel was successfully restored from /home/intern/.cache/huggingface/hub/models--nvidia--stt_uz_fastconformer_hybrid_large_pc/snapshots/cd32f63d620a7b0cb461ed00ecfc45c852eb0bef/stt_uz_fastconformer_hybrid_large_pc.nemo.
+[NeMo I 2026-11-12 12:10:15 hybrid_rnnt_ctc_bpe_models:488] No `decoding_cfg` passed when changing decoding strategy, using internal config
+[NeMo I 2026-11-12 12:10:15 hybrid_rnnt_ctc_bpe_models:513] Changed decoding strategy of the CTC decoder to 
+    strategy: greedy
+    preserve_alignments: null
+    compute_timestamps: null
+    word_seperator: ' '
+    segment_seperators:
+    - .
+    - '!'
+    - '?'
+    segment_gap_threshold: null
+    ctc_timestamp_type: all
+    batch_dim_index: 0
+    greedy:
+      preserve_alignments: false
+      compute_timestamps: false
+      preserve_frame_confidence: false
+      confidence_method_cfg:
+        name: entropy
+        entropy_type: tsallis
+        alpha: 0.33
+        entropy_norm: exp
+        temperature: DEPRECATED
+      ngram_lm_model: null
+      ngram_lm_alpha: 0.0
+      boosting_tree:
+        model_path: null
+        key_phrases_file: null
+        key_phrases_list: null
+        key_phrase_items_list: null
+        context_score: 1.0
+        depth_scaling: 2.0
+        unk_score: 0.0
+        final_eos_score: 1.0
+        score_per_phrase: 0.0
+        source_lang: en
+        use_triton: true
+        uniform_weights: false
+        use_bpe_dropout: false
+        num_of_transcriptions: 5
+        bpe_alpha: 0.3
+      boosting_tree_alpha: 0.0
+      allow_cuda_graphs: true
+    beam:
+      beam_size: 4
+      search_type: default
+      preserve_alignments: false
+      compute_timestamps: false
+      return_best_hypothesis: true
+      allow_cuda_graphs: true
+      beam_alpha: null
+      beam_beta: 1.0
+      beam_threshold: 20.0
+      kenlm_path: null
+      ngram_lm_alpha: 1.0
+      ngram_lm_model: null
+      boosting_tree:
+        model_path: null
+        key_phrases_file: null
+        key_phrases_list: null
+        key_phrase_items_list: null
+        context_score: 1.0
+        depth_scaling: 2.0
+        unk_score: 0.0
+        final_eos_score: 1.0
+        score_per_phrase: 0.0
+        source_lang: en
+        use_triton: true
+        uniform_weights: false
+        use_bpe_dropout: false
+        num_of_transcriptions: 5
+        bpe_alpha: 0.3
+      boosting_tree_alpha: 0.0
+      flashlight_cfg:
+        lexicon_path: null
+        boost_path: null
+        beam_size_token: 16
+        beam_threshold: 20.0
+        unk_weight: -.inf
+        sil_weight: 0.0
+      pyctcdecode_cfg:
+        beam_prune_logp: -10.0
+        token_min_logp: -5.0
+        prune_history: false
+        hotwords: null
+        hotword_weight: 10.0
+    wfst:
+      beam_size: 4
+      search_type: riva
+      return_best_hypothesis: true
+      preserve_alignments: false
+      compute_timestamps: false
+      decoding_mode: nbest
+      open_vocabulary_decoding: false
+      beam_width: 10.0
+      lm_weight: 1.0
+      device: cuda
+      arpa_lm_path: null
+      wfst_lm_path: null
+      riva_decoding_cfg: {}
+    confidence_cfg:
+      preserve_frame_confidence: false
+      preserve_token_confidence: false
+      preserve_word_confidence: false
+      exclude_blank: true
+      aggregation: min
+      tdt_include_duration: false
+      method_cfg:
+        name: entropy
+        entropy_type: tsallis
+        alpha: 0.33
+        entropy_norm: exp
+        temperature: DEPRECATED
+    temperature: 1.0
+    
+Model loaded on cpu
+
+===== 1308_genzel-va-gretel
+[12:10:18] stage 6: recording /home/intern/book_audio_alignment/data/paired/1308_genzel-va-gretel/pipeline/chunks/recording_16k.wav
+[12:10:33] stage 7: cut 20 sections
+[12:10:33] stage 8: 0 of 20 sections already transcribed
+[12:11:06] stage 8: transcribed 20 of 20
+[NeMo I 2026-11-12 12:11:06 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:06 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:06 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s][NeMo W 2026-11-12 12:11:06 nemo_logging:364] /home/intern/book_audio_alignment/.venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+      warnings.warn(warn_msg)
+    
+[NeMo W 2026-11-12 12:11:07 ctc_greedy_decoding:277] CTC decoding strategy 'greedy' is slower than 'greedy_batch', which implements the same exact interface. Consider changing your strategy to 'greedy_batch' for a free performance improvement.
+Transcribing: 1it [00:01,  1.37s/it]Transcribing: 1it [00:01,  1.37s/it]
+[NeMo I 2026-11-12 12:11:07 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:07 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:07 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.35s/it]Transcribing: 1it [00:01,  1.35s/it]
+[NeMo I 2026-11-12 12:11:09 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:09 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:09 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.42s/it]Transcribing: 1it [00:01,  1.42s/it]
+[NeMo I 2026-11-12 12:11:10 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:10 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:10 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.34s/it]Transcribing: 1it [00:01,  1.34s/it]
+[NeMo I 2026-11-12 12:11:12 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:12 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:12 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.39s/it]Transcribing: 1it [00:01,  1.39s/it]
+[NeMo I 2026-11-12 12:11:13 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:13 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:13 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.35s/it]Transcribing: 1it [00:01,  1.35s/it]
+[NeMo I 2026-11-12 12:11:15 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:15 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:15 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.36s/it]Transcribing: 1it [00:01,  1.36s/it]
+[NeMo I 2026-11-12 12:11:16 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:16 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:16 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.41s/it]Transcribing: 1it [00:01,  1.41s/it]
+[NeMo I 2026-11-12 12:11:17 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:17 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:17 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.50s/it]Transcribing: 1it [00:01,  1.50s/it]
+[NeMo I 2026-11-12 12:11:19 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:19 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:19 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.52s/it]Transcribing: 1it [00:01,  1.52s/it]
+[NeMo I 2026-11-12 12:11:21 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:21 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:21 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.36s/it]Transcribing: 1it [00:01,  1.36s/it]
+[NeMo I 2026-11-12 12:11:22 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:22 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:22 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.30s/it]Transcribing: 1it [00:01,  1.30s/it]
+[NeMo I 2026-11-12 12:11:23 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:23 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:23 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.35s/it]Transcribing: 1it [00:01,  1.35s/it]
+[NeMo I 2026-11-12 12:11:25 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:25 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:25 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.27s/it]Transcribing: 1it [00:01,  1.27s/it]
+[NeMo I 2026-11-12 12:11:26 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:26 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:26 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.42s/it]Transcribing: 1it [00:01,  1.42s/it]
+[NeMo I 2026-11-12 12:11:27 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:27 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:27 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.30s/it]Transcribing: 1it [00:01,  1.30s/it]
+[NeMo I 2026-11-12 12:11:29 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:29 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:29 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.41s/it]Transcribing: 1it [00:01,  1.41s/it]
+[NeMo I 2026-11-12 12:11:30 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:30 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:30 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.38s/it]Transcribing: 1it [00:01,  1.38s/it]
+[NeMo I 2026-11-12 12:11:32 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:32 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:32 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:01,  1.42s/it]Transcribing: 1it [00:01,  1.42s/it]
+[NeMo I 2026-11-12 12:11:33 aligner_utils:914] `output_timestep_duration` is not provided, so we calculated that the model output_timestep_duration is 0.08 ms. -- will use this for all batches
+[NeMo W 2026-11-12 12:11:33 dataloader:881] The following configuration keys are ignored by Lhotse dataloader: use_start_end_token
+[NeMo W 2026-11-12 12:11:33 dataloader:533] You are using a non-tarred dataset and requested tokenization during data sampling (pretokenize=True). This will cause the tokenization to happen in the main (GPU) process,possibly impacting the training speed if your tokenizer is very large.If the impact is noticable, set pretokenize=False in dataloader config.(note: that will disable token-per-second filtering and 2D bucketing features)
+Transcribing: 0it [00:00, ?it/s]Transcribing: 1it [00:00,  1.75it/s]Transcribing: 1it [00:00,  1.75it/s]
+[12:11:34] stage 9: 1740 words from 20 sections (0 sections had no speech), 0 out of time order
+[12:11:34] stage 10: 1599 of 1740 words confirmed by the book (91.9%)
+[12:11:34] stage 11: 91 chunks, 6.09-25.5 s, average 12.6 s
+[12:11:34] stage 12: clean     12 clips    2.34 min
+[12:11:34] stage 12: review    23 clips    4.39 min
+[12:11:34] stage 12: reject    56 clips   12.41 min

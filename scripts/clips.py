@@ -1,12 +1,17 @@
-"""Stage 12: cut the chunks out of the recording and write the training manifests.
+"""Stage 12: cut the chunks out of the recording, write the manifests and the metadata.
 
 A NeMo manifest is a text file with one JSON object per line, one line per clip:
 {"audio_filepath": "/.../test_0001.wav", "duration": 12.4, "text": "..."}
 Training reads the clips and their texts from it.
+
+metadata.json lives next to the clips: for every clip its path, duration,
+text and word count.
 """
 
 import json
+import os
 import subprocess
+from pathlib import Path
 
 import soundfile
 
@@ -62,3 +67,28 @@ def write_manifest(chunks, manifest_path, tiers):
 
     manifest_path.write_text("".join(lines), encoding="utf-8")
     return len(lines)
+
+
+def write_metadata(chunks, metadata_path):
+    """Write metadata.json: a list with one simple entry per clip.
+
+    {"path": "wavs/test_0001.wav", "duration": 12.4, "text": "...", "word_count": 18}
+
+    "path" is relative to the folder of metadata.json, so the chunks folder
+    still works after copying it between the Mac and the remote.
+    """
+    folder = metadata_path.parent
+    entries = []
+    for chunk in chunks:
+        entries.append({
+            "path": Path(os.path.relpath(chunk["audio_filepath"], folder)).as_posix(),
+            "duration": chunk["duration"],
+            "text": chunk["text"],
+            "word_count": len(chunk["text"].split()),
+        })
+
+    metadata_path.write_text(
+        json.dumps(entries, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return entries

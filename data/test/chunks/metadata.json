@@ -1,0 +1,284 @@
+[
+  {
+    "path": "wavs/test_0000.wav",
+    "duration": 10.23,
+    "text": "Qadrli bolajonlar, oʻzbek xalq ertaklari asosidagi baxt daraxti nomli ertakni aytib beraman. Bolalar adabiyoti jurnali.",
+    "word_count": 15
+  },
+  {
+    "path": "wavs/test_0001.wav",
+    "duration": 8.3,
+    "text": "Qadim zamonda bir podsho oʻtgan ekan, U taxtda doim gʻamgin oʻtirar ekan.",
+    "word_count": 12
+  },
+  {
+    "path": "wavs/test_0002.wav",
+    "duration": 10.48,
+    "text": "Kunlarning birida oʻng qoʻli vaziri undan, Podshohim, nimagadir mudom gʻamginsiz, boisi nima? deb soʻrabdi.",
+    "word_count": 14
+  },
+  {
+    "path": "wavs/test_0003.wav",
+    "duration": 13.01,
+    "text": "Mol-u davlatim yetarli, ammo oʻlgandan keyin bel bogʻlab boʻzlaydigan oʻgʻlim yoʻq, oʻgʻil koʻrsam, boshqa armonim qolmaydi, debdi podsho.",
+    "word_count": 18
+  },
+  {
+    "path": "wavs/test_0004.wav",
+    "duration": 13.36,
+    "text": "Olampanoh, sizga maslahatim bor. Chinmochin mamlakatida bir daraxt bor, u daraxti baxt deb ataladi, uning bargini ming dardga shifo deydilar,",
+    "word_count": 20
+  },
+  {
+    "path": "wavs/test_0005.wav",
+    "duration": 10.41,
+    "text": "shu bargdan olib kelishni buyuring, podsho vazirdan bu maslahatni eshitib xursand boʻlibdi va shaharga jarchi qoʻydiribdi,",
+    "word_count": 16
+  },
+  {
+    "path": "wavs/test_0006.wav",
+    "duration": 12.05,
+    "text": "Kimki Chinmochin mamlakatiga borib, podsho uchun daraxti baxtning bargidan olib kelsa, ul bahodirga xazinaning yarmisi in’om etiladi.",
+    "word_count": 17
+  },
+  {
+    "path": "wavs/test_0007.wav",
+    "duration": 14.5,
+    "text": "Bu ovozani eshitib, shoyad olib kelolsak, oliy hazratning in’omiga muyassar boʻlardik, deydiganlar koʻpayib qolibdi-yu, lekin birortasi ham yurak yutib podshoh huzuriga kelmabdi.",
+    "word_count": 22
+  },
+  {
+    "path": "wavs/test_0008.wav",
+    "duration": 15.87,
+    "text": "Buxorodan ancha uzoq bir qishloqdan Baxtiyor degan choʻpon yigit shoh saroyiga kelib, jarchilaringizdan eshitdimki, Chinmochin mamlakatiga borib siz uchun daraxti baxt bargidan olib kelmoq kerak ekan.",
+    "word_count": 26
+  },
+  {
+    "path": "wavs/test_0009.wav",
+    "duration": 10.74,
+    "text": "Oʻsha daraxtdan barg keltirib beraman degan niyat bilan huzuringizga keldim, debdi. Podsho talabgor chiqqanidan juda xursand boʻlibdi,",
+    "word_count": 17
+  },
+  {
+    "path": "wavs/test_0010.wav",
+    "duration": 13.44,
+    "text": "baxtiyor hukmdorga shart qoʻyibdi, Shartim bor, kambagʻallarga yordam bersangiz, podsho bu shartni eshitib, vazir-u amaldorlarga maslahat solibdi,",
+    "word_count": 17
+  },
+  {
+    "path": "wavs/test_0011.wav",
+    "duration": 12.2,
+    "text": "ular norozi boʻlib, Kambagʻal boylik azaldan har kimning peshonasiga bitilgan, kambagʻallarning qay biriga yordam berasiz, unda xazina boʻshab qoladi-ku,",
+    "word_count": 19
+  },
+  {
+    "path": "wavs/test_0012.wav",
+    "duration": 9.08,
+    "text": "deyishibdi, Baxtiyor, Shartimga koʻnsangizgina boraman, deb turib olibdi, podsho ancha oʻylanib, mayli,",
+    "word_count": 12
+  },
+  {
+    "path": "wavs/test_0013.wav",
+    "duration": 10.85,
+    "text": "shartingni bajo keltiraman, tezroq bora qol, deb Baxtiyorga uchqur ot va xurjun toʻla oltin berib joʻnatibdi, Baxtiyor yoʻl yuribdi,",
+    "word_count": 19
+  },
+  {
+    "path": "wavs/test_0014.wav",
+    "duration": 12.46,
+    "text": "yoʻl yursa ham moʻl yuribdi, daryolardan, changalzorlardan, choʻllardan, baland togʻlardan oʻtibdi, nihoyat Bogʻi Zeboga yetib boribdi,",
+    "word_count": 16
+  },
+  {
+    "path": "wavs/test_0015.wav",
+    "duration": 11.37,
+    "text": "otini oʻtlatgani qoʻyib yuborib, oʻzi hovuz boʻyiga yonboshlabdi, dam olgach, ozgina tamaddi qilish niyatida suv olish uchun hovuzga engashibdi,",
+    "word_count": 19
+  },
+  {
+    "path": "wavs/test_0016.wav",
+    "duration": 9.83,
+    "text": "suv betida bir parini aksi koʻrinibdi, chunonam xushroʻy va zebo ekanki, jamoli bogʻni munavvar etib turganmish,",
+    "word_count": 16
+  },
+  {
+    "path": "wavs/test_0017.wav",
+    "duration": 10.85,
+    "text": "Baxtiyor anchadan keyin oʻziga kelib, yuqoriga qarasa, oʻsha pari hovuz boʻyidagi daraxt ustida oʻtirganmish, yigit pariga,",
+    "word_count": 16
+  },
+  {
+    "path": "wavs/test_0018.wav",
+    "duration": 15.25,
+    "text": "Ey hurliqo, pastga tush, choy ichamiz, borimni baham koʻrayin, debdi, pari qiz daraxtdan tushibdi, Baxtiyor undan, Oting nima, kimning jigargoʻshasisan? deb soʻrabdi.",
+    "word_count": 22
+  },
+  {
+    "path": "wavs/test_0019.wav",
+    "duration": 13.23,
+    "text": "Men Xuroson podshosining qizi boʻlaman, ismim Gulnora, devlar meni bu yerga oʻgʻirlab olib kelgan, bu yer devlarning makoni, hali zamon devlar kelib qoladi,",
+    "word_count": 23
+  },
+  {
+    "path": "wavs/test_0020.wav",
+    "duration": 18.46,
+    "text": "oʻzingni nega xarob qilmoqchisan, tezroq bu yerdan joʻnab qolgin, debdi qiz, Baxtiyor qizga, Ey malika, qoʻrqoqning qoʻri oʻchadi, degan gap bor, devdan qoʻrqadigan yerim yoʻq, qoʻrqoq oʻzini yigit deb hisoblasa uyat boʻladi,",
+    "word_count": 32
+  },
+  {
+    "path": "wavs/test_0021.wav",
+    "duration": 11.54,
+    "text": "men Chinmochin yurtiga daraxti baxtni qidirib ketyapman, u yerga borishim shart, debdi yigit. E, Botir yigit, senga qoyil qoldim,",
+    "word_count": 19
+  },
+  {
+    "path": "wavs/test_0022.wav",
+    "duration": 17.09,
+    "text": "isming jismingga oʻxshasin, baxt senga yor boʻlsin, mayli, senga bir yaxshilik qilay, sen uzoq yoʻl bosib, baland togʻga yetasan, u yerda devlarning otasi yashaydi, u chinmochingga oʻtadigan yoʻlni qoʻriqlaydi,",
+    "word_count": 29
+  },
+  {
+    "path": "wavs/test_0023.wav",
+    "duration": 9.08,
+    "text": "oʻzingdan boxabar boʻl, mana bu ogʻir kuningga yaraydi, deb qiz Baxtiyorga qirq gazli dudama qilich beribdi.",
+    "word_count": 16
+  },
+  {
+    "path": "wavs/test_0024.wav",
+    "duration": 11.62,
+    "text": "Yigit Gulnoradan birga ketishni soʻrabdi. Gulnora, devlar izimizdan borib, bizni sogʻ qoʻyishmaydi, unda podshoga bergan va’dangizni ham bajarolmaysiz,",
+    "word_count": 18
+  },
+  {
+    "path": "wavs/test_0025.wav",
+    "duration": 11.14,
+    "text": "eson-omon qaytib kelsangiz, ana unda birga boraman, deb va’da beribdi. Baxtiyorning dimogʻi chogʻ boʻlib, yoʻlga ravona boʻlibdi, yana",
+    "word_count": 18
+  },
+  {
+    "path": "wavs/test_0026.wav",
+    "duration": 11.16,
+    "text": "yetti kecha-yu yetti kunduz yoʻl yurib, devlarning otasi makon qurgan togʻga yetib boribdi, togʻ juda baland va haybatli ekan,",
+    "word_count": 19
+  },
+  {
+    "path": "wavs/test_0027.wav",
+    "duration": 11.12,
+    "text": "yigit otiga qamchi bosgan ekan, joni bor uchib togʻ tepasiga chiqibdi, shu payt havoga chang-toʻzon koʻtarilib, atrof qorongʻilashibdi,",
+    "word_count": 18
+  },
+  {
+    "path": "wavs/test_0028.wav",
+    "duration": 12.46,
+    "text": "devning kelayotganini sezgan Baxtiyor qirq gazli dudama qilichini qoʻliga olib shaylanib turibdi, ogʻzidan oʻt purkayotgan dev haybat bilan baqirib yaqinlashibdi.",
+    "word_count": 20
+  },
+  {
+    "path": "wavs/test_0029.wav",
+    "duration": 12.13,
+    "text": "Baxtiyor ham tavakkal qilib devning oldiga kelibdi. Dev battar dagʻdagʻa qilibdi va urushasanmi yoki talashasanmi, yaramas, debdi,",
+    "word_count": 17
+  },
+  {
+    "path": "wavs/test_0030.wav",
+    "duration": 7.46,
+    "text": "ham urush-u, ham talash, maydonga chiq, debdi Baxtiyor. Dev maydonga tushibdi,",
+    "word_count": 11
+  },
+  {
+    "path": "wavs/test_0031.wav",
+    "duration": 12.08,
+    "text": "ikkovi uch kecha-kunduz urishibdi, goh Baxtiyorning, goh devning qoʻli baland kelibdi, uchinchi kuni kechga borib dev hansiray boshlabdi,",
+    "word_count": 18
+  },
+  {
+    "path": "wavs/test_0032.wav",
+    "duration": 8.45,
+    "text": "Baxtiyor bor kuchini toʻplab, qilich bilan uning boshiga urgan ekan, maxluq chinorday qulabdi,",
+    "word_count": 13
+  },
+  {
+    "path": "wavs/test_0033.wav",
+    "duration": 10.7,
+    "text": "Baxtiyor devning terisidan bir tasma kesib olib, beliga bogʻlabdi-yu, Chinmochin mamlakati qaydasan, deb yoʻlga ravona boʻlibdi.",
+    "word_count": 16
+  },
+  {
+    "path": "wavs/test_0034.wav",
+    "duration": 8.01,
+    "text": "Tagʻin bir oy yoʻl yurib, Chinmochin mamlakatiga yetib boribdi, shahar tinch, osoyishta ekan.",
+    "word_count": 13
+  },
+  {
+    "path": "wavs/test_0035.wav",
+    "duration": 13.43,
+    "text": "Baxtiyor otda koʻchadan oʻtib borayotganida bir odam uni toʻxtatib, uyiga taklif qilibdi, Mehmonim boʻlgin, sen bu yurtning fuqarosiga oʻxshamaysan, debdi u.",
+    "word_count": 21
+  },
+  {
+    "path": "wavs/test_0036.wav",
+    "duration": 12.33,
+    "text": "Baxtiyor taklifni qabul qilib, oʻsha kishinikida mehmon boʻlibdi, ziyofatdan soʻng mezbon Baxtiyordan bu yerga kelish sababini soʻrabdi, yigit maqsadini aytibdi,",
+    "word_count": 20
+  },
+  {
+    "path": "wavs/test_0037.wav",
+    "duration": 13.39,
+    "text": "Shahrimizda darhaqiqat daraxti baxt bor, uning bargi ming dardga shifo, lekin hanuzgacha bu yoqlarga hech kim kelolmagan, yoʻlda devlarga uchrab halok boʻlardi,",
+    "word_count": 22
+  },
+  {
+    "path": "wavs/test_0038.wav",
+    "duration": 15.03,
+    "text": "sen ulardan qanday oʻtib kelding? debdi hunarmand. Baxtiyor devlarning otasini oʻldirganini va tanasidan tasma qirqib olganini aytib, tasmani koʻrsatibdi. Hunarmand xursand boʻlib,",
+    "word_count": 22
+  },
+  {
+    "path": "wavs/test_0039.wav",
+    "duration": 12.15,
+    "text": "yosh boʻlsang ham bahodir ekansan, koʻp kishilarni ofatdan xalos etibsan, balli, debdi. Soʻng Baxtiyorni daraxti baxtning oldiga boshlab boribdi.",
+    "word_count": 19
+  },
+  {
+    "path": "wavs/test_0040.wav",
+    "duration": 10.2,
+    "text": "Ular ikkovlashib, bargdan anchasini terib, xaltachaga solibdilar, ertasiga Baxtiyor hunarmand bilan xayrlashib, yoʻlga tushibdi,",
+    "word_count": 14
+  },
+  {
+    "path": "wavs/test_0041.wav",
+    "duration": 19.24,
+    "text": "Baxtiyor yana uzoq yoʻl bosib, Gulnora parining qoshiga kelibdi, Yigitni koʻrib xursand boʻlgan qiz, Senga qoyil boʻldim, azamat, devlarning otasini oʻldirib ajab qilibsan, sara qilibsan, oʻgʻillari otalarining qotilini izlab motam tutyaptilar,",
+    "word_count": 31
+  },
+  {
+    "path": "wavs/test_0042.wav",
+    "duration": 9.85,
+    "text": "endi ulardan ehtiyot boʻlish kerak, debdi. Baxtiyor Gulnorani ham otga mingashtirib, Buxoro mamlakatiga yoʻl olibdi,",
+    "word_count": 15
+  },
+  {
+    "path": "wavs/test_0043.wav",
+    "duration": 12.23,
+    "text": "podsho Baxtiyorning kelayotganini eshitib, amaldorlari bilan yoʻliga peshvoz chiqibdi, yigit daraxti baxtning bargini tovoze bilan podshoga beribdi,",
+    "word_count": 17
+  },
+  {
+    "path": "wavs/test_0044.wav",
+    "duration": 16.97,
+    "text": "Podsho xursand boʻlib, baxtiyorga koʻp in’omlar hadya qilibdi va fuqaroga rahm qilib, uysizlarga uy qurdirganini, molsizlarga mol berib, ogʻir zakotdan ozod etish toʻgʻrisida farmoni oliy berganini aytibdi,",
+    "word_count": 27
+  },
+  {
+    "path": "wavs/test_0045.wav",
+    "duration": 13.49,
+    "text": "oradan bir yil oʻtgach, mamlakat hukmdori oʻgʻil koʻrdi degan xushxabar tarqalibdi. Hamma shod-u xurram boʻlib, murod-maqsadiga yetibdi. Podsho uchun daraxti baxt",
+    "word_count": 21
+  },
+  {
+    "path": "wavs/test_0046.wav",
+    "duration": 9.68,
+    "text": "izlagan Baxtiyor ham Gulnora pari bilan baxtli hayot kechiribdi. Bolalar adabiyoti orzu-niyatlaringiz kaliti.",
+    "word_count": 13
+  }
+]

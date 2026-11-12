@@ -12,7 +12,6 @@ MAX_WORD_SECONDS = 2.0
 MIN_LETTERS_PER_SECOND = 5.0
 MAX_LETTERS_PER_SECOND = 20.0
 MIN_CONFIRMED_SHARE = 1.0
-MAX_TRIMMED = 0.5
 
 
 def grade(chunk, words):
@@ -41,9 +40,8 @@ def grade(chunk, words):
         missing = [word["word"] for word in chunk_words if not word["confirmed"]]
         doubts.append("not confirmed by the book: " + " ".join(missing))
 
-    for word in chunk_words:
-        if word["trimmed"] > MAX_TRIMMED:
-            doubts.append(f"repaired word '{word['word']}' (trimmed {word['trimmed']} s)")
+    if not chunk["quiet_cuts"]:
+        doubts.append("cut where the audio is not silent: listen to the edges")
 
     if problems:
         return "reject", problems

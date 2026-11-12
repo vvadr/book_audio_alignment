@@ -101,7 +101,10 @@ def stitch(sections, words_per_section):
                 left_out.append((i, word))
 
     for i, word in left_out:
-        neighbours = kept[max(0, i - 1)] + kept[min(len(kept) - 1, i + 1)]
+        neighbours = []
+        for j in (i - 1, i + 1):
+            if 0 <= j < len(kept):
+                neighbours.extend(kept[j])
         if not same_word_nearby(word, neighbours):
             kept[i].append(word)
 

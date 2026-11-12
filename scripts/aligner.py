@@ -2,6 +2,12 @@
 
 "Forced" alignment means we already know WHAT is said (the text), and the
 model only has to find WHEN each word is said in the audio.
+
+The model is a CTC model: it marks each piece of a word ("▁de", "v", "dan")
+with a short spike, one 80 ms frame long, and says "blank" everywhere else.
+So a word's start and end are the times of its first and last spike. The
+real sound lasts a little longer on both sides; chunks.py listens to the
+audio to cut only in silence.
 """
 
 import torch
@@ -15,8 +21,9 @@ from nemo.collections.asr.parts.utils.aligner_utils import (
     Word,
 )
 
+from uzbek_text import MODEL_CHARS
+
 MODEL_NAME = "nvidia/stt_uz_fastconformer_hybrid_large_pc"
-MIN_FRAME_SCORE = -3.0
 
 
 def load_model():
@@ -34,15 +41,30 @@ def load_model():
     return model
 
 
-def make_word(word, log_probs, frame_duration):
-    """Turn one aligned NeMo word into a dict with its time, score and trimmed seconds.
+def quiet_edges(log_probs, frame_count):
+    """Tell the aligner that the first and last frame of the file are silent.
 
-    The score is the average log-probability of the word's pieces over the
-    frames they cover: 0 means certain, -1 is about 37 %, -3 is about 5 %.
-    Frames the model was not sure about (below MIN_FRAME_SCORE) are cut off
-    both ends of the word. That is how "Qadrli" loses its 11 s of music.
+    A section file starts and ends suddenly, often in the middle of a sound.
+    In that first frame the model "hears" a piece of a word that is not
+    there, and the aligner pulls the first word back to 0 s: "Oʻsha" started
+    at 121.55 s instead of 122.19 s, and "Qadrli" covered 11 s of music.
+
+    log_probs[0, frame, token] is the model's score for `token` in `frame`.
+    The blank token is the last one. We make blank certain (score 0) and
+    every other token impossible (a very low score) in those two frames.
     """
-    frame_numbers = []
+    blank = log_probs.shape[-1] - 1
+    for frame in (0, frame_count - 1):
+        log_probs[0, frame, :] = -10000.0
+        log_probs[0, frame, blank] = 0.0
+
+
+def make_word(word, log_probs, frame_duration):
+    """Turn one aligned NeMo word into a dict with its time and score.
+
+    The score is the average log-probability of the word's spikes:
+    0 means certain, -1 is about 37 %, -3 is about 5 %.
+    """
     frame_scores = []
 
     for token in word.tokens:
@@ -52,29 +74,13 @@ def make_word(word, log_probs, frame_duration):
         first_frame = round(token.t_start / frame_duration)
         last_frame = round(token.t_end / frame_duration)
         for frame in range(first_frame, last_frame):
-            frame_numbers.append(frame)
             frame_scores.append(log_probs[0, frame, token.token_id].item())
-
-    sure_frames = [
-        frame for frame, frame_score in zip(frame_numbers, frame_scores)
-        if frame_score >= MIN_FRAME_SCORE
-    ]
-
-    if sure_frames:
-        start = sure_frames[0] * frame_duration
-        end = (sure_frames[-1] + 1) * frame_duration
-    else:
-        start = word.t_start
-        end = word.t_end
-
-    trimmed = (word.t_end - word.t_start) - (end - start)
 
     return {
         "word": word.text,
-        "start": round(start, 2),
-        "end": round(end, 2),
+        "start": round(word.t_start, 2),
+        "end": round(word.t_end, 2),
         "score": round(sum(frame_scores) / len(frame_scores), 2),
-        "trimmed": round(trimmed, 2),
     }
 
 
@@ -82,9 +88,14 @@ def align(model, audio_path, text):
     """Find when each word of `text` is spoken in `audio_path`.
 
     Returns a list like
-    [{"word": "oʻzbek", "start": 12.72, "end": 13.12, "score": -0.4, "trimmed": 0.0}, ...].
+    [{"word": "oʻzbek", "start": 12.72, "end": 13.12, "score": -0.4}, ...].
     Times are in seconds, counted from the start of this audio file.
+    Prepare `text` with uzbek_text.to_model_text first.
     """
+    unknown = sorted({char for char in text if char not in MODEL_CHARS and not char.isspace()})
+    if unknown:
+        print(f"Warning: {audio_path} has characters the model does not know: {' '.join(unknown)}")
+
     (
         log_probs,
         token_ids,
@@ -98,6 +109,8 @@ def align(model, audio_path, text):
         gt_text_batch=[text],
         align_using_pred_text=False,
     )
+
+    quiet_edges(log_probs, int(audio_lengths[0]))
 
     alignments = viterbi_decoding(
         log_probs,
